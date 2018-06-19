@@ -32,8 +32,7 @@ plt.xlabel('身高(cm)', size=15)
 plt.ylabel('体重(kg)', size=15)
 plt.show()
 
-def demo():
-    print("hello")
+
 
 
 
