@@ -1,12 +1,20 @@
-# from src.KdTree import KdTree
-# import numpy as np
+import matplotlib.ticker as ticker
+import matplotlib.pyplot as plt
+import matplotlib.pyplot
+import numpy as np
 
-# grief_heights = np.random.normal(50, 6, 3)
-# grief_weights = np.random.normal(5, 0.5, 3)
-#
-# grieves = map(lambda x,y: tuple(((x,y),'g')), grief_heights, grief_weights)
-# tree = KdTree(list(grieves))
-# print(tree)
-result = [(1,5),(4,3)]
-m = max([x[1] for x in result])
-print(m)
+matplotlib.rcParams.update({'font.size': 12, 'font.family': 'sans'})
+
+x = np.linspace(0, 5, 10)
+y = x ** 2
+
+fig, ax = plt.subplots(1, 1)
+
+ax.plot(x, x ** 2, x, np.exp(x))
+ax.set_yticks([0, 50, 100, 150])
+# formatter = ticker.ScalarFormatter(useMathText=True)
+# formatter.set_scientific(True)
+# formatter.set_powerlimits((-1, 1))
+# ax.yaxis.set_major_formatter(formatter)
+# ax.grid(True)
+plt.show()

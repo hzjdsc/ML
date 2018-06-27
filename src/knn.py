@@ -8,16 +8,16 @@ import matplotlib.pyplot as plt
 from src.KdTree import KdTree
 
 # 100个正态分布的悲伤
-grief_heights = np.random.normal(50, 6, 100)
-grief_weights = np.random.normal(5, 0.5, 100)
+grief_heights = np.random.normal(50, 6, 20)
+grief_weights = np.random.normal(5, 0.5, 20)
 
 # 100个正态分布的痛苦
-agony_heights = np.random.normal(30, 6, 100)
-agony_weights = np.random.normal(4, 0.5, 100)
+agony_heights = np.random.normal(30, 6, 20)
+agony_weights = np.random.normal(4, 0.5, 20)
 
 # 100个正态分布的绝望
-despair_heights = np.random.normal(45, 6, 100)
-despair_weights = np.random.normal(2.5, 0.5, 100)
+despair_heights = np.random.normal(45, 6, 20)
+despair_weights = np.random.normal(2.5, 0.5, 20)
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 fig_size = plt.rcParams["figure.figsize"]
@@ -25,28 +25,35 @@ fig_size[0] = 15
 fig_size[1] = 10
 
 # 设置样本集
-grieves = map(lambda x,y:tuple(((x,y),'g')), grief_heights, grief_weights)
-agonies = map(lambda x,y:tuple(((x,y),'b')), grief_heights, grief_weights)
-despairs = map(lambda x,y:tuple(((x,y),'y')), grief_heights, grief_weights)
+grieves = map(lambda x, y: tuple(((x, y), 'g')), grief_heights, grief_weights)
+agonies = map(lambda x, y: tuple(((x, y), 'b')), grief_heights, grief_weights)
+despairs = map(lambda x, y: tuple(((x, y), 'y')), grief_heights, grief_weights)
+
 # 创建kd树
-tree = KdTree(list(grieves)+list(agonies)+list(despairs))
+tree = KdTree(list(grieves) + list(agonies) + list(despairs))
+
+print(list(grieves))
+
 # 穷举生成空间上的点
 all_points = []
 for i in range(100, 701, 10):
     for j in range(100, 701, 10):
-        all_points.append((float(i)/10., float(j)/100.))
-# 一共36万个点
+        all_points.append((float(i) / 10., float(j) / 100.))
+
 len(all_points)
+
+
 # 设置归一化距离函数
-def normalized_dist(x,y):
-    return (x[0]-y[0])**2+(10*x[1]-10*y[1])**2
+def normalized_dist(x, y):
+    return (x[0] - y[0]) ** 2 + (10 * x[1] - 10 * y[1]) ** 2
+
 
 # 每个点运算15NN，并记录计算时间
 now = datetime.datetime.now()
 fifteen_NN_result = []
 for point in all_points:
     fifteen_NN_result.append((point, tree.kNN(point, k=15, dist=normalized_dist)[0]))
-print(datetime.datetime.now()-now)
+print(datetime.datetime.now() - now)
 
 # 把每个颜色的数据分开
 fifteen_NN_yellow = []
@@ -74,25 +81,3 @@ plt.xlabel('身高(cm)', size=15)
 plt.ylabel('体重(kg)', size=15)
 
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
