@@ -92,6 +92,7 @@ class KdTree(object):
     # 返回该点概率最大的类别以及相对应的概率
     def kNN(self, point, k, dist=lambda x, y: sum(map(lambda u, v: (u - v) ** 2, x, y))):
         nearests = self.knearest(point, k, dist)
+        print(nearests)
         statistics = {}
         for data in nearests:
             label = data[0][1]
